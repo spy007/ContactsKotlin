@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.contactskotlin.ContactsApp
 import com.contactskotlin.R
 import com.contactskotlin.data.factory.ContactsViewModelFactory
+import com.contactskotlin.data.model.Contact
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -22,6 +24,11 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+
+        ContactsApp.appComponent.inject(this)
+
+        val contacts = viewModel.getContacts()
+
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -29,5 +36,4 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ContactsViewModel::class.java)
     }
-
 }
