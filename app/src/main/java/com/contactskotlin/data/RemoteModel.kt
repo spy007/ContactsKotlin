@@ -3,7 +3,7 @@ package com.contactskotlin.data
 import com.contactskotlin.data.model.Phone
 
 data class ContactsResponse(
-        val cityName: String,
+        val id: String,
         val name: String,
         val email: String,
         val address: String,

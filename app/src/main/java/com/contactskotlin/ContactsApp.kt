@@ -1,10 +1,7 @@
 package com.contactskotlin
 
 import android.app.Application
-import com.contactskotlin.data.di.AppComponent
-import com.contactskotlin.data.di.AppModule
-import com.contactskotlin.data.di.RemoteModule
-import com.contactskotlin.data.di.RoomModule
+import com.contactskotlin.data.di.*
 
 class ContactsApp: Application() {
     companion object {

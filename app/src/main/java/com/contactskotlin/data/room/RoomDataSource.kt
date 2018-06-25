@@ -4,13 +4,12 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.contactskotlin.data.dto.ContactDTO
 
 
 @Database(entities = arrayOf(ContactEntity::class), version = 1)
 abstract class RoomDataSource : RoomDatabase() {
 
-    abstract fun contactDao(): ContactDTO
+    abstract fun contactDao(): ContactsDao
 
     companion object {
 

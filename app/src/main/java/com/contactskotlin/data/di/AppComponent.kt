@@ -1,6 +1,5 @@
 package com.contactskotlin.data.di
 
-import com.contactskotlin.MainActivity
 import com.contactskotlin.ui.main.MainFragment
 import dagger.Component
 import javax.inject.Singleton

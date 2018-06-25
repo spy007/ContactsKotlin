@@ -1,6 +1,5 @@
 package com.contactskotlin.data.dto
 
-import com.contactskotlin.data.model.Phone
 import org.parceler.Parcel
 import org.parceler.ParcelConstructor
 
@@ -11,7 +10,7 @@ data class ContactDTO @ParcelConstructor constructor(
         val email: String,
         val address: String,
         val gender: String,
-        val phone: Phone
+        val phone: PhoneDTO
 )
 
 @Parcel(Parcel.Serialization.BEAN)
