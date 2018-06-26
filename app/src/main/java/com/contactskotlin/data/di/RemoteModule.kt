@@ -37,7 +37,7 @@ class RemoteModule {
     @Singleton
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
             Retrofit.Builder()
-                    .baseUrl(RemoteConfig.BASE_URL)
+                    .baseUrl(RemoteConfig.BASE_API_LAYER)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
@@ -45,6 +45,6 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideRemoteWeatherService(retrofit: Retrofit): RemoteContactsService =
+    fun provideRemoteContactsService(retrofit: Retrofit): RemoteContactsService =
             retrofit.create(RemoteContactsService::class.java)
 }

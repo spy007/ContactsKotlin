@@ -9,9 +9,8 @@ import javax.inject.Singleton
 
 @Singleton
 class ContactsRepositoryImpl @Inject constructor(
-    private val remoteContactsDataSource: RemoteContactsDataSource) : ContactsRepository {
+    private val remoteContactsDataSource: RemoteContactsDataSource
+) : ContactsRepository {
 
-    override fun getContacts(): Single<ContactsResponse> {
-        return remoteContactsDataSource.requestContacts()
-    }
+    override fun getContacts(): Single<ContactDTO> = remoteContactsDataSource.requestContacts()
 }

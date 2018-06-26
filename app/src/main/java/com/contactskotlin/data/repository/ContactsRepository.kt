@@ -6,5 +6,5 @@ import io.reactivex.Single
 
 
 interface ContactsRepository {
-    fun getContacts(): Single<ContactsResponse>
+    fun getContacts(): Single<ContactDTO>
 }

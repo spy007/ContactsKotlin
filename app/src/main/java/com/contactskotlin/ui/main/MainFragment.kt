@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import com.contactskotlin.ContactsApp
 import com.contactskotlin.R
 import com.contactskotlin.data.ContactsResponse
+import com.contactskotlin.data.dto.ContactDTO
 import com.contactskotlin.data.factory.ContactsViewModelFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -19,19 +22,10 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    @Inject
-    lateinit var viewModelFactory: ContactsViewModelFactory
-    private lateinit var viewModel: ContactsViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-
-        ContactsApp.appComponent.inject(this)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ContactsViewModel::class.java)
-
-        viewModel.getContacts().subscribe{contactsResponse: ContactsResponse? ->
-            Log.d("me007", "count=" + contactsResponse?.name)}
 
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
