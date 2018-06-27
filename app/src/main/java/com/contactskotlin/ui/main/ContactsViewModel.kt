@@ -6,4 +6,6 @@ import javax.inject.Inject
 
 class ContactsViewModel @Inject constructor(val contactsRepository: ContactsRepository) : ViewModel() {
     fun getContacts() = contactsRepository.getContacts()
+
+    fun getCities() = contactsRepository.getCities()
 }

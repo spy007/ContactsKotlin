@@ -25,23 +25,57 @@ class RemoteModule {
                     .setLenient()
                     .create()
 
+//    @Provides
+//    @Singleton
+//    fun provideOkHttpClient(): OkHttpClient =
+//            OkHttpClient.Builder()
+//                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//                    .build()
+//
+//
+//    @Provides
+//    @Singleton
+//    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
+//            Retrofit.Builder()
+//                    .baseUrl(RemoteConfig.BASE_API_LAYER)
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                    .client(okHttpClient)
+//                    .build()
+
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient =
-            OkHttpClient.Builder()
-                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                    .build()
-
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
             Retrofit.Builder()
                     .baseUrl(RemoteConfig.BASE_API_LAYER)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)
                     .build()
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        httpClient.addInterceptor { chain ->
+            val original = chain.request()
+            val originalHttpUrl = original.url()
+
+            val url = originalHttpUrl.newBuilder()
+//                    .addQueryParameter("username", "stasvip")
+                    .build()
+
+            // Request customization: add request headers
+            val requestBuilder = original.newBuilder()
+                    .url(url)
+
+            val request = requestBuilder.build()
+            chain.proceed(request)
+        }
+
+        return httpClient.build()
+    }
 
     @Provides
     @Singleton

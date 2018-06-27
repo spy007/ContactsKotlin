@@ -3,19 +3,37 @@ package com.contactskotlin.data.dto
 import org.parceler.Parcel
 import org.parceler.ParcelConstructor
 
-@Parcel(Parcel.Serialization.BEAN)
-data class ContactDTO @ParcelConstructor constructor(
-        val cityName: String,
-        val name: String,
-        val email: String,
-        val address: String,
-        val gender: String,
-        val phone: PhoneDTO
-)
+class ContactsDTO {
+    val contacts: List<ContactDTO>? = null
+}
 
-@Parcel(Parcel.Serialization.BEAN)
-data class PhoneDTO @ParcelConstructor constructor(
-        val mobile: String,
-        val home: String,
-        val office: String
-)
+class ContactDTO {
+    var cityName: String? = null
+    val name: String? = null
+    val email: String? = null
+    val address: String? = null
+    val gender: String? = null
+    val phone: PhoneDTO? = null
+}
+
+class PhoneDTO {
+    var mobile: String? = null
+    var home: String? = null
+    var office: String? = null
+}
+
+class Geoname {
+
+    var lat: Double = 0.toDouble()
+    var lng: Double = 0.toDouble()
+    var geonameId: Long = 0
+    var countrycode: String? = null
+    var name: String? = null
+    var fclName: String? = null
+    var toponymName: String? = null
+    var fcodeName: String? = null
+    var wikipedia: String? = null
+    var fcl: String? = null
+    var population: Long = 0
+    var fcode: String? = null
+}
