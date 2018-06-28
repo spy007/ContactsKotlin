@@ -22,6 +22,8 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,18 +33,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+
+        val binding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.main_activity)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow()
         }
-
-//        provideRetrofit(provideOkHttpClient()).create(RemoteContactsService::class.java)
-//                .queryGeonames(44.1, -9.9, -22.4, 55.2, "de")
-//                .subscribeOn(Schedulers.io()) // "work" on io thread
-//                .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
-//                .subscribe { contactDTO -> Log.d("me007", "received: ${contactDTO.geonames?.get(0)?.fclName}") }
 
         ContactsApp.appComponent.inject(this)
 
@@ -52,7 +50,9 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe{result: ContactsDTO?/*CityResponse*/? ->
-                    Log.d("me007", "received city name: " + result?.contacts/*geonames*/?.get(0)?.name)}
+                    val contact = result?.contacts/*geonames*/?.get(0)
+                    binding.setContactDTO(contact)
+                    Log.d("me007", "received city name: " + contact?.name)}
     }
 
 }
