@@ -3,8 +3,7 @@ package com.contactskotlin.data.dto
 import org.parceler.Parcel
 import org.parceler.ParcelConstructor
 
-class ContactsDTO {
-    val contacts: List<ContactDTO>? = null
+data class ContactsDTO(val contacts: List<ContactDTO>?) {
 }
 
 class ContactDTO {

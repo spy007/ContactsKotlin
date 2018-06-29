@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContactsKotlin</string>
+    <string name="buttonText">Показано городов %1$d раз</string>
 </resources>

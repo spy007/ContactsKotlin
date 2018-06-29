@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="contactDTO" type="com.contactskotlin.data.dto.ContactDTO"/>
+        <variable name="contacts" type="String"/>
+        <variable name="count" type="android.databinding.ObservableInt"/>
     </data>
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="160dp"
             android:layout_marginTop="244dp"
-            android:text="@{contactDTO.name}"
+            android:text="@{contacts}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,10 +26,10 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="47dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="136dp"
             android:layout_marginTop="184dp"
             android:layout_marginBottom="17dp"
-            android:text="Показать контакты"
+            android:text="@{@string/buttonText(count)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"
